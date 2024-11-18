@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+long factorial(int n)
+{
+    if(n==0){
+        return 1;
+    }
+    else
+        return (n*factorial(n-1)); // for 3, 3*3*3 = 3*(fact(3-1)) is recursion
+}
+int main(){
+    int num,fact;
+    printf("enter a number : \n");
+    scanf("%d",&num);
+    
+    fact=factorial(num);
+    printf("the factorial of %d is %d ",num,fact);
+}
