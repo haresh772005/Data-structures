@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the structure for a stack node
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to push an element onto the stack
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node)); // Create a new node
+    newNode->data = data;    // Assign data to the new node
+    newNode->next = *top;     // Point the new node to the current top
+    *top = newNode;           // Move the top pointer to the new node
+    printf("Pushed %d onto the stack.\n", data);
+}
+
+// Function to pop an element from the stack
+void pop(struct Node** top) {
+    if (*top == NULL) {  // Check if the stack is empty
+        printf("Stack is empty. Cannot pop.\n");
+        return;
+    }
+    struct Node* temp = *top;   // Temporarily store the current top
+    *top = (*top)->next;         // Move the top pointer to the next node
+    printf("Popped %d from the stack.\n", temp->data);
+    free(temp);                  // Free the memory of the popped node
+}
+
+// Function to display the stack elements
+void displayStack(struct Node* top) {
+    if (top == NULL) {
+        printf("Stack is empty.\n");
+        return;
+    }
+    printf("Stack: ");
+    while (top != NULL) {
+        printf("%d -> ", top->data);
+        top = top->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct Node* top = NULL; // Initialize an empty stack
+
+    // Push elements onto the stack
+    push(&top, 10);
+    push(&top, 20);
+    push(&top, 30);
+
+    // Display the stack
+    printf("Stack after pushes: ");
+    displayStack(top);
+
+    // Pop elements from the stack
+    pop(&top);
+    pop(&top);
+
+    // Display the stack after pops
+    printf("Stack after pops: ");
+    displayStack(top);
+
+    return 0;
+}
