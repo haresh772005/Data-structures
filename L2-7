@@ -1,0 +1,75 @@
+#include <stdio.h>
+
+#define MAX 100
+
+// Function to insert an element at a specified position
+void insert(int arr[], int *size, int element, int position) {
+    // Check if position is valid
+    if (position > *size || position < 0) {
+        printf("Invalid position!\n");
+        return;
+    }
+
+    // Shift elements to the right
+    for (int i = *size; i > position; i--) {
+        arr[i] = arr[i - 1];
+    }
+
+    // Insert the new element at the specified position
+    arr[position] = element;
+
+    // Increment the size of the array
+    (*size)++;
+}
+
+// Function to delete an element at a specified position
+void delete(int arr[], int *size, int position) {
+    // Check if position is valid
+    if (position >= *size || position < 0) {
+        printf("Invalid position!\n");
+        return;
+    }
+
+    // Shift elements to the left to fill the gap
+    for (int i = position; i < *size - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+
+    // Decrease the size of the array
+    (*size)--;
+}
+
+// Function to display the array
+void display(int arr[], int size) {
+    printf("Array elements: ");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr[MAX];
+    int size = 0; // Initialize array size to 0
+
+    // Inserting elements into the array
+    insert(arr, &size, 10, 0);  // Insert 10 at position 0
+    insert(arr, &size, 20, 1);  // Insert 20 at position 1
+    insert(arr, &size, 30, 2);  // Insert 30 at position 2
+    insert(arr, &size, 40, 3);  // Insert 40 at position 3
+    insert(arr, &size, 50, 4);  // Insert 50 at position 4
+
+    // Display the array after insertions
+    printf("After insertions:\n");
+    display(arr, size);
+
+    // Deleting elements from the array
+    delete(arr, &size, 2);  // Delete element at position 2 (30)
+    delete(arr, &size, 1);  // Delete element at position 1 (20)
+
+    // Display the array after deletions
+    printf("After deletions:\n");
+    display(arr, size);
+
+    return 0;
+}
